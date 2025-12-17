@@ -23,6 +23,7 @@ const nextConfig: NextConfig = {
   },
   reactStrictMode: true,
   redirects,
+serverExternalPackages: ['sharp']
 }
 
 export default withPayload(nextConfig)

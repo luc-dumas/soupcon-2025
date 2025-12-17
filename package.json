@@ -6,7 +6,7 @@
 	"type": "module",
 	"scripts": {
 		"build": "next build",
-		"dev": "next dev --turbo",
+		"dev": "next dev",
 		"start": "next start",
 		"generate:types": "payload generate:types",
 		"generate:importmap": "payload generate:importmap",
@@ -15,7 +15,7 @@
 		"setup": "node -e \"process.env.VERCEL_ENV || process.env.CI ? console.log('Skipping setup in CI environment') : require('child_process').execSync('node src/lib/scripts/setup.js', {stdio: 'inherit'})\""
 	},
 	"dependencies": {
-		"@payloadcms/db-mongodb": "^3.24.0",
+		"@payloadcms/db-postgres": "^3.68.5",
 		"@payloadcms/live-preview-react": "^3.24.0",
 		"@payloadcms/next": "^3.24.0",
 		"@payloadcms/payload-cloud": "^3.24.0",
@@ -37,11 +37,12 @@
 		"next": "^15.1.5",
 		"next-sitemap": "^4.2.3",
 		"payload": "^3.24.0",
+		"pg": "^8.16.3",
 		"prism-react-renderer": "^2.3.1",
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0",
 		"react-hook-form": "7.45.4",
-		"sharp": "0.32.6",
+		"sharp": "0.34.5",
 		"tailwind-merge": "^2.3.0",
 		"tailwindcss-animate": "^1.0.7"
 	},
