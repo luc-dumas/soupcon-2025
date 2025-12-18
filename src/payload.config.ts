@@ -64,3 +64,9 @@ export default buildConfig({
     ...plugins
   ],
 })
+
+  // During development, you can enable auto-login to test different permission levels. In your payload.config.ts:
+//   autoLogin: process.env.NEXT_PUBLIC_ENABLE_AUTOLOGIN === 'true' ? {
+//   email: 'nick+user@midlowebdesign.com',
+//   password: 'user',
+// } : false,

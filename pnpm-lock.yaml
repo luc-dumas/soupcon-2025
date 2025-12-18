@@ -50,6 +50,9 @@ importers:
       '@radix-ui/react-toggle-group':
         specifier: ^1.1.2
         version: 1.1.11(@types/react-dom@19.0.3(@types/react@19.0.7))(@types/react@19.0.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@smithy/core':
+        specifier: ^3.19.0
+        version: 3.19.0
       class-variance-authority:
         specifier: ^0.7.0
         version: 0.7.1
