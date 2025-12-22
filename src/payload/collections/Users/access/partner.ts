@@ -1,9 +1,9 @@
 import type {Access} from 'payload'
 import { checkRole } from './checkRole'
 
-const editor: Access = ({ req: { user } }) => {
+const partner: Access = ({ req: { user } }) => {
   if (user) {
-    if (checkRole(['admin', 'editor'], user)) {
+    if (checkRole(['admin', 'partner'], user)) {
       return true
     }
   }
@@ -11,4 +11,4 @@ const editor: Access = ({ req: { user } }) => {
   return false
 }
 
-export default editor
+export default partner

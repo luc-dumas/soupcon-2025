@@ -1,14 +1,9 @@
-import type {Access} from 'payload'
-import { checkRole } from './checkRole'
+import type { Access } from 'payload'
+import type { User } from '@/payload-types'
 
-const admin: Access = ({ req: { user } }) => {
-  if (user) {
-    if (checkRole(['admin'], user)) {
-      return true
-    }
-  }
-
-  return false
+const admin: Access = ({ req }) => {
+  const user = req.user as User | null
+  return user?.role === 'admin'
 }
 
 export default admin

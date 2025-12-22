@@ -13,7 +13,8 @@ export default async function Home() {
   const {permissions, user} = await payload.auth({headers})
 
   return <h1>
-    {user ? `You are authenticated as ${user.roles?.map(role => role).join(', ')}` : 'You are not logged in'}
+    
+    {/* {user ? `You are authenticated as ${user.role?.map(role => role).join(', ')}` : 'You are not logged in'} */}
   </h1>
 
 }

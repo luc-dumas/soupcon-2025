@@ -1,18 +1,19 @@
 import type { CollectionConfig, User } from 'payload'
 import { protectRoles } from './hooks/protectRoles'
 import admin from './access/admin'
-import editor from './access/editor'
-import user from './access/user'
+import { canReadUsers } from './hooks/canReadUsers'
 import { checkRole } from './access/checkRole'
+import { defaultFirstUserRole } from './hooks/defaultFirstUserRole'
+
 
 
 
 export const Users: CollectionConfig = {
   slug: 'users',
   access: {
-    create: editor,
-    read: user,
-    update: user,
+    create: admin,
+    read: canReadUsers,
+    update: admin,
     delete: admin,
   },
   admin: {
@@ -29,20 +30,28 @@ export const Users: CollectionConfig = {
       },
     },
     {
-      name: 'roles',
+      name: 'role',
       type: 'select',
-      hasMany: true,
+      required: true,
       saveToJWT: true,
       options: [
         { label: 'Admin', value: 'admin' },
-        { label: 'Editor', value: 'editor' },
+        { label: 'Partner', value: 'partner' },
         { label: 'User', value: 'user' },
       ],
+      defaultValue: 'partner',
+      admin: {
+        condition: (_, { operation }) => {
+          // hide ONLY when creating a user
+          return operation !== 'create'
+        },
+      },
       hooks: {
-        beforeChange: [protectRoles], // we'll define this next
+        beforeChange: [protectRoles, defaultFirstUserRole],
       },
       access: {
         update: ({ req: { user } }) => checkRole(['admin'], user as User),
+        read: ({ req: { user } }) => checkRole(['admin'], user as User),
       },
     }
   ],
