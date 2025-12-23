@@ -331,3 +331,31 @@ You can also deploy your app manually, check out the [deployment documentation](
 ## Questions
 
 If you have any issues or questions, reach out to us on [Discord](https://discord.com/invite/payload) or start a [GitHub discussion](https://github.com/payloadcms/payload/discussions).
+
+# Helpful Commands
+
+Starting the docker container if you dont have it yet
+```bash
+docker run -d \
+  --name soupcon-postgres \
+  -e POSTGRES_DB=soupcon2025 \
+  -e POSTGRES_PASSWORD=password \
+  -p 5433:5432 \
+  -v soupcon_pg_data:/var/lib/postgresql/data \
+  postgres:16
+```
+
+Starting the docker container if you already have the image
+```bash
+docker start soupcon-postgres
+```
+
+Running app in devlopment
+```bash
+pnpm run dev
+```
+
+Reset database
+```bash
+pnpm exec payload migrate:fresh
+```
