@@ -220,16 +220,6 @@ Ideally we recommend running a local copy of your database so that schema update
 
 If your database is pointed to production you will want to keep `push: false` otherwise you will risk losing data or having your migrations out of sync.
 
-#### Troubleshooting: `events` list view shows `column "title" does not exist`
-
-If you switched from `media/posts` to `events` and your local DB has a partially-renamed `events` table, run:
-
-```bash
-DATABASE_URI=postgresql://127.0.0.1:5432/your-database-name pnpm db:fix-events-schema
-```
-
-This script safely creates any missing `events` columns expected by the current Payload config (`title`, `start_date`, `summary`, `slug`, `slug_lock`, `created_at`, `updated_at`).
-
 #### Migrations
 
 [Migrations](https://payloadcms.com/docs/database/migrations) are essentially SQL code versions that keeps track of your schema. When deploy with Postgres you will need to make sure you create and then run your migrations.
