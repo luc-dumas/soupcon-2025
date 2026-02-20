@@ -3,10 +3,8 @@ import { postgresAdapter } from '@payloadcms/db-postgres'
 import { buildConfig } from 'payload'
 import sharp from 'sharp'
 
-import { Categories } from '@/payload/collections/Categories'
-import { Media } from '@/payload/collections/Media'
+import { Events } from '@/payload/collections/Events'
 import { Pages } from '@/payload/collections/Pages'
-import { Posts } from '@/payload/collections/Posts'
 import { Users } from '@/payload/collections/Users'
 import { defaultLexical } from '@/payload/fields/defaultLexical'
 import { Footer } from '@/payload/globals/Footer/config'
@@ -48,11 +46,14 @@ export default buildConfig({
   // This config helps us configure global or default features that the other editors can inherit
   editor: defaultLexical,
   db: postgresAdapter({
+    // Disable automatic schema push to avoid interactive column-rename prompts.
+    // Use explicit migrations instead (`pnpm payload migrate:create` then `pnpm payload migrate`).
+    push: false,
     pool: {
       connectionString: process.env.DATABASE_URI!,
     },
   }),
-  collections: [Users, Media, Pages, Posts, Categories],
+  collections: [Users, Events, Pages],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
   secret: process.env.PAYLOAD_SECRET,

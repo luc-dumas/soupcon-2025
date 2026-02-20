@@ -214,9 +214,21 @@ Note that often times when making big schema changes you can run the risk of los
 
 #### Local development
 
-Ideally we recommend running a local copy of your database so that schema updates are as fast as possible. By default the Postgres adapter has `push: true` for development environments. This will let you add, modify and remove fields and collections without needing to run any data migrations.
+Ideally we recommend running a local copy of your database so that schema updates are as fast as possible.
 
-If your database is pointed to production you will want to set `push: false` otherwise you will risk losing data or having your migrations out of sync.
+> This project sets `push: false` in `src/payload.config.ts` so schema changes are handled through migrations. This avoids interactive "is this a rename?" prompts when you remove or repurpose collections during early project setup.
+
+If your database is pointed to production you will want to keep `push: false` otherwise you will risk losing data or having your migrations out of sync.
+
+#### Troubleshooting: `events` list view shows `column "title" does not exist`
+
+If you switched from `media/posts` to `events` and your local DB has a partially-renamed `events` table, run:
+
+```bash
+DATABASE_URI=postgresql://127.0.0.1:5432/your-database-name pnpm db:fix-events-schema
+```
+
+This script safely creates any missing `events` columns expected by the current Payload config (`title`, `start_date`, `summary`, `slug`, `slug_lock`, `created_at`, `updated_at`).
 
 #### Migrations
 

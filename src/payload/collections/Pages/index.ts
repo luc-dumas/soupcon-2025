@@ -1,11 +1,9 @@
-import type { CollectionConfig, Field } from 'payload'
+import type { CollectionConfig } from 'payload'
 
 import { authenticated } from '@/payload/auth/authenticated'
 import { authenticatedOrPublished } from '@/payload/auth/authenticatedOrPublished'
-import { Archive } from '@/payload/blocks/ArchiveBlock/config'
 import { CallToAction } from '@/payload/blocks/CallToAction/config'
 import { Content } from '@/payload/blocks/Content/config'
-import { MediaBlock } from '@/payload/blocks/MediaBlock/config'
 import { slugField } from '@/payload/fields/slug'
 import { populatePublishedAt } from '@/payload/hooks/populatePublishedAt'
 import { generatePreviewPath } from '@/lib/utils/generatePreviewPath'
@@ -13,13 +11,10 @@ import { revalidateDelete, revalidatePage } from './hooks/revalidatePage'
 
 import {
   MetaDescriptionField,
-  MetaImageField,
   MetaTitleField,
   OverviewField,
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
-import { HighImpactHero } from '@/payload/blocks/HighImpact/config'
-import { MediumImpactHero } from '@/payload/blocks/MediumImpact/config'
 import { LowImpactHero } from '@/payload/blocks/LowImpact/config'
 
 export const Pages: CollectionConfig<'pages'> = {
@@ -79,13 +74,9 @@ export const Pages: CollectionConfig<'pages'> = {
                 plural: 'blocks',
               },
               blocks: [
-                HighImpactHero,
-                MediumImpactHero,
                 LowImpactHero,
                 CallToAction,
                 Content,
-                MediaBlock,
-                Archive,
               ],
               admin: {
                 initCollapsed: true,
@@ -104,9 +95,6 @@ export const Pages: CollectionConfig<'pages'> = {
             }),
             MetaTitleField({
               hasGenerateFn: true,
-            }),
-            MetaImageField({
-              relationTo: 'media',
             }),
             MetaDescriptionField({}),
             PreviewField({
