@@ -12,7 +12,8 @@
 		"generate:importmap": "payload generate:importmap",
 		"lint": "next lint",
 		"payload": "payload",
-		"setup": "node -e \"process.env.VERCEL_ENV || process.env.CI ? console.log('Skipping setup in CI environment') : require('child_process').execSync('node src/lib/scripts/setup.js', {stdio: 'inherit'})\""
+		"setup": "node -e \"process.env.VERCEL_ENV || process.env.CI ? console.log('Skipping setup in CI environment') : require('child_process').execSync('node src/lib/scripts/setup.js', {stdio: 'inherit'})\"",
+		"db:fix-events-schema": "node src/lib/scripts/fixEventsSchema.js"
 	},
 	"dependencies": {
 		"@payloadcms/db-postgres": "^3.68.5",
