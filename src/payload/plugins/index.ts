@@ -5,14 +5,18 @@ import { seoPlugin } from '@payloadcms/plugin-seo'
 import { Plugin } from 'payload'
 
 import { getServerSideURL } from '@/lib/utils/getURL'
-import { Page, Post } from '@/payload-types'
 import { revalidateRedirects } from '../hooks/revalidateRedirects'
+
+type SEOCollectionDoc = {
+   slug?: string | null
+   title?: string | null
+}
 
 export const plugins: Plugin[] = [
    // storage-adapter-placeholder,
 
    redirectsPlugin({
-      collections: ['pages', 'posts'],
+      collections: ['pages', 'events'],
       overrides: {
          // @ts-expect-error - This is a valid override, mapped fields don't resolve to the same type
          fields: ({ defaultFields }) => {
@@ -35,10 +39,10 @@ export const plugins: Plugin[] = [
    }),
 
    seoPlugin({
-      generateTitle: ({ doc }: { doc: Post | Page }) => {
+      generateTitle: ({ doc }: { doc: SEOCollectionDoc }) => {
          return doc?.title ? `${doc.title} | payloadblocks.dev Website Template` : 'payloadblocks.dev Website Template'
       },
-      generateURL: ({ doc }: { doc: Post | Page }) => {
+      generateURL: ({ doc }: { doc: SEOCollectionDoc }) => {
          const url = getServerSideURL()
          return doc?.slug ? `${url}/${doc.slug}` : url
       },
