@@ -46,6 +46,9 @@ export default buildConfig({
   // This config helps us configure global or default features that the other editors can inherit
   editor: defaultLexical,
   db: postgresAdapter({
+    // Disable automatic schema push to avoid interactive column-rename prompts.
+    // Use explicit migrations instead (`pnpm payload migrate:create` then `pnpm payload migrate`).
+    push: false,
     pool: {
       connectionString: process.env.DATABASE_URI!,
     },
